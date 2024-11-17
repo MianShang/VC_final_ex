@@ -124,12 +124,37 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 ///윈도우 창크기 구하는 RECT변수
 RECT wn_Size;
+RECT box = {0,0,30,30};
+#define width 50
+#define height 30
 
+enum map
+{
+    wall,space,item
+};
+
+int map_area[width][height];
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+    case WM_CREATE: 
+    {
+        ///벽 지정 for문
+        for (int i = 0; i < width; i++) 
+        {
+            map_area[i][0] = wall;
+            map_area[i][height-1] = wall;
+        }
+        for (int i = 0; i < height; i++) 
+        {
+            map_area[0][i] = wall;
+            map_area[width-1][i] = wall;
+        }
+    }
+    break;
+
     case WM_SIZE: 
     {
         ///윈도우 창크기 구하기
@@ -158,7 +183,29 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+            for (int i = 0; i < width; i++) {
+                if (map_area[width - 1][0] == wall) 
+                {
+                    Rectangle(hdc, box.left, box.top, box.right, box.bottom);
+                    Rectangle(hdc, box.left, 900, box.right, 930);
+                    box.left += 30;
+                    box.right = box.left + 30;
+                    
+                }
+            }
+            box.top = 0;
+            box.bottom = box.top + 30;
+            for (int i = 0; i < height; i++) 
+            {
+                if (map_area[0][i] == wall)
+                {   
+                    Rectangle(hdc, 0, box.top, 30, box.bottom);
+                    Rectangle(hdc, 1500, box.top, 1530, box.bottom);
+                    box.top += 30;
+                    box.bottom = box.top + 30;
 
+                }
+            }
 
 
             EndPaint(hWnd, &ps);
