@@ -121,10 +121,21 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
 //
 //
+
+///윈도우 창크기 구하는 RECT변수
+RECT wn_Size;
+
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+    case WM_SIZE: 
+    {
+        ///윈도우 창크기 구하기
+        GetClientRect(hWnd,&wn_Size);
+    }
+    break;
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -147,6 +158,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+
+
+
             EndPaint(hWnd, &ps);
         }
         break;
