@@ -2,7 +2,16 @@
 
 void Map_Area::Setmap()
 {   
-    
+
+    for (int i = 0; i < width; i ++)
+    {
+        for (int j = 0; j < height; j ++)
+        {
+            map_area[i][j] = item;
+        }
+    }
+
+    ///벽 테두리 설정
     for (int i = 0; i < width; i++)
     {
         map_area[i][0] = wall;
@@ -14,14 +23,14 @@ void Map_Area::Setmap()
         map_area[width-1][i] = wall;
     }
 
-    // 가운데 벽 생성
+    // 가운데 벽 설정
     for (int i = 2; i < width - 2; i += 2)
     {
         for (int j = 2; j < height - 2; j += 2)
         {
             map_area[i][j] = wall;
 
-            // 상하좌우 중 랜덤하게 한 방향으로 벽 연장
+            /// 상하좌우 중 랜덤하게 한 방향으로 벽 연장 설정
             int direction = rand() % 4;
             switch (direction)
             {
@@ -40,6 +49,12 @@ void Map_Area::Setmap()
         int j = 2 + rand() % (height - 4);
         map_area[i][j] = 0;
     }
+
+    ///플레이어 시작위치 설정
+    map_area[1][1] = start;
+    ///적 시작위치 설정
+    map_area[28][23] = enemy;
+
 }
 
 void Map_Area::Getmap(HDC hdc) 
@@ -78,11 +93,12 @@ void Map_Area::Getmap(HDC hdc)
             box.top = j * 30;
             box.right = box.left + 30;
             box.bottom = box.top + 30;
+
             if (map_area[i][j] == wall)
             {
                 Rectangle(hdc, box.left, box.top, box.right, box.bottom);
             }
-            else 
+            if(map_area[i][j]== item)
             {   
                 box.left += 10;
                 box.top += 10;

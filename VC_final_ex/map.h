@@ -7,12 +7,13 @@
 
 enum map
 {
-	space, wall, item, start
+	space, wall,item , start, enemy
 };
 
 class Map_Area 
 {
 private:
+	
 
 
 public:
