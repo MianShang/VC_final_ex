@@ -1,6 +1,7 @@
 #pragma once
 #include <stdlib.h>
 #include <windows.h>
+#include "object.h"
 
 #define width 30
 #define height 25
@@ -14,13 +15,15 @@ class Map_Area
 {
 private:
 	
-
+	RECT box;
+	RECT a;
 
 public:
 
 	int map_area[width][height];
-	RECT box = { 0,0,30,30 };
+	
 	void Setmap();
-	void Getmap(HDC hdc);
+	void Getmap(HDC,OBject,HWND);
+
 
 };

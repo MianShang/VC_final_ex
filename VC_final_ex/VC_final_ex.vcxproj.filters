@@ -10,7 +10,8 @@
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
     <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <UniqueIdentifier>
+      </UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
@@ -55,6 +56,15 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="VC_final_ex.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="bitmap1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="..\팩맨\packman.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="..\팩맨\pngwing.com.png">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

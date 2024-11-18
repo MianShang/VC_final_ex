@@ -124,28 +124,47 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 ///윈도우 창크기 구하는 RECT변수
 RECT wn_Size;
-
 Map_Area map1;
-
+OBject object;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+        static HDC memDC;
+        static HBITMAP MyBitmap, OldBitmap;
+
     case WM_CREATE: 
-    {
+    {   
+        ///시작전 화면 크기 구하기
+        GetClientRect(hWnd, &wn_Size);
+
+        HDC hdc = GetDC(hWnd);
         ///벽 지정 for문
         map1.Setmap();
+        memDC = CreateCompatibleDC(hdc); /// 백버퍼 핸들 생성
+        MyBitmap = CreateCompatibleBitmap(hdc, wn_Size.right, wn_Size.bottom); ///back버퍼 도화지 크기 조정
+        SelectObject(memDC, MyBitmap); ///도화지 선택
+        ReleaseDC(hWnd, hdc);
     }
     break;
 
     case WM_SIZE: 
     {
-        ///윈도우 창크기 구하기
+        ///창크기 변경시 마다 창크기 구하기
         GetClientRect(hWnd,&wn_Size);
-        map1.box = { 0,0,30,30 };
     }
     break;
+
+    case WM_KEYDOWN: 
+    {   
+        
+        object.setPlayer(wParam);
+        InvalidateRect(hWnd, NULL, FALSE);
+        
+    }
+    break;
+
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -168,16 +187,29 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+            HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 0));
+       
+                FillRect(memDC, &wn_Size, hBrush);
+           
             
-            ///맵 그리기를 가져옴
-            map1.Getmap(hdc); 
+            DeleteObject(hBrush);
 
+            ///맵 그리기를 후위 버퍼에 그리기
+            map1.Getmap(memDC,object,hWnd);
 
+            ///플레이어 Object를 그림
+            object.drawPlayer(memDC);
+
+            ///후위 버퍼 내용을 전위 버퍼 hdc에 고속 복사
+            BitBlt(hdc, 0,0, wn_Size.right,wn_Size.bottom, memDC, 0, 0, SRCCOPY); 
+           
             EndPaint(hWnd, &ps);
         }
         break;
     case WM_DESTROY:
         PostQuitMessage(0);
+        DeleteObject(MyBitmap);
+        DeleteDC(memDC);
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);

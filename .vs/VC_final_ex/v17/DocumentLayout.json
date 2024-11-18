@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "D:\\Code\\VC_final_ex\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|D:\\Code\\VC_final_ex\\VC_final_ex\\VC_final_ex.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|solutionrelative:VC_final_ex\\VC_final_ex.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|D:\\Code\\VC_final_ex\\VC_final_ex\\map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|solutionrelative:VC_final_ex\\map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|D:\\Code\\VC_final_ex\\VC_final_ex\\Resource.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|solutionrelative:VC_final_ex\\Resource.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|D:\\Code\\VC_final_ex\\VC_final_ex\\framework.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|solutionrelative:VC_final_ex\\framework.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|D:\\Code\\VC_final_ex\\VC_final_ex\\VC_final_ex.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -25,6 +13,22 @@
     {
       "AbsoluteMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|D:\\Code\\VC_final_ex\\VC_final_ex\\map.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|solutionrelative:VC_final_ex\\map.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|D:\\Code\\VC_final_ex\\VC_final_ex\\object.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|solutionrelative:VC_final_ex\\object.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|D:\\Code\\VC_final_ex\\VC_final_ex\\framework.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|solutionrelative:VC_final_ex\\framework.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|D:\\Code\\VC_final_ex\\VC_final_ex\\object.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|solutionrelative:VC_final_ex\\object.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|D:\\Code\\VC_final_ex\\VC_final_ex\\VC_final_ex.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F414AA00-2AF6-435A-AC1B-B5A0AA901563}|VC_final_ex\\VC_final_ex.vcxproj|solutionrelative:VC_final_ex\\VC_final_ex.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,17 +38,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "VC_final_ex.h",
               "DocumentMoniker": "D:\\Code\\VC_final_ex\\VC_final_ex\\VC_final_ex.h",
               "RelativeDocumentMoniker": "VC_final_ex\\VC_final_ex.h",
               "ToolTip": "D:\\Code\\VC_final_ex\\VC_final_ex\\VC_final_ex.h",
               "RelativeToolTip": "VC_final_ex\\VC_final_ex.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-11-17T16:55:38.301Z",
               "IsPinned": true,
@@ -53,12 +57,38 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "object.cpp",
+              "DocumentMoniker": "D:\\Code\\VC_final_ex\\VC_final_ex\\object.cpp",
+              "RelativeDocumentMoniker": "VC_final_ex\\object.cpp",
+              "ToolTip": "D:\\Code\\VC_final_ex\\VC_final_ex\\object.cpp",
+              "RelativeToolTip": "VC_final_ex\\object.cpp",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-18T11:57:31.074Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "object.h",
+              "DocumentMoniker": "D:\\Code\\VC_final_ex\\VC_final_ex\\object.h",
+              "RelativeDocumentMoniker": "VC_final_ex\\object.h",
+              "ToolTip": "D:\\Code\\VC_final_ex\\VC_final_ex\\object.h",
+              "RelativeToolTip": "VC_final_ex\\object.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-11-18T11:50:31.586Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "framework.h",
               "DocumentMoniker": "D:\\Code\\VC_final_ex\\VC_final_ex\\framework.h",
               "RelativeDocumentMoniker": "VC_final_ex\\framework.h",
               "ToolTip": "D:\\Code\\VC_final_ex\\VC_final_ex\\framework.h",
               "RelativeToolTip": "VC_final_ex\\framework.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-11-17T16:55:46.785Z",
               "EditorCaption": ""
@@ -66,51 +96,38 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Resource.h",
-              "DocumentMoniker": "D:\\Code\\VC_final_ex\\VC_final_ex\\Resource.h",
-              "RelativeDocumentMoniker": "VC_final_ex\\Resource.h",
-              "ToolTip": "D:\\Code\\VC_final_ex\\VC_final_ex\\Resource.h",
-              "RelativeToolTip": "VC_final_ex\\Resource.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-11-17T16:55:41.048Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "map.h",
               "DocumentMoniker": "D:\\Code\\VC_final_ex\\VC_final_ex\\map.h",
               "RelativeDocumentMoniker": "VC_final_ex\\map.h",
               "ToolTip": "D:\\Code\\VC_final_ex\\VC_final_ex\\map.h",
               "RelativeToolTip": "VC_final_ex\\map.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwIAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-11-17T16:55:17.17Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "map.cpp",
               "DocumentMoniker": "D:\\Code\\VC_final_ex\\VC_final_ex\\map.cpp",
               "RelativeDocumentMoniker": "VC_final_ex\\map.cpp",
               "ToolTip": "D:\\Code\\VC_final_ex\\VC_final_ex\\map.cpp",
               "RelativeToolTip": "VC_final_ex\\map.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAAE0AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-11-17T16:55:06.087Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "VC_final_ex.cpp",
               "DocumentMoniker": "D:\\Code\\VC_final_ex\\VC_final_ex\\VC_final_ex.cpp",
               "RelativeDocumentMoniker": "VC_final_ex\\VC_final_ex.cpp",
               "ToolTip": "D:\\Code\\VC_final_ex\\VC_final_ex\\VC_final_ex.cpp",
               "RelativeToolTip": "VC_final_ex\\VC_final_ex.cpp",
-              "ViewState": "AgIAAG8AAAAAAAAAAAAAAH4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAALAAAAAAAAAAAAArwMUAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-11-11T04:07:56.57Z",
               "EditorCaption": ""

@@ -1,5 +1,8 @@
 #include "map.h"
 
+///잠깐 따로 빼둠
+
+
 void Map_Area::Setmap()
 {   
 
@@ -47,7 +50,7 @@ void Map_Area::Setmap()
     {
         int i = 2 + rand() % (width - 4);
         int j = 2 + rand() % (height - 4);
-        map_area[i][j] = 0;
+        map_area[i][j] = item;
     }
 
     ///플레이어 시작위치 설정
@@ -57,55 +60,40 @@ void Map_Area::Setmap()
 
 }
 
-void Map_Area::Getmap(HDC hdc) 
+void Map_Area::Getmap(HDC hdc,OBject object, HWND hWnd)
 {
-   /* for (int i = 0; i < width; i++) {
-        if (map_area[i][0] == wall)
-        {
-            Rectangle(hdc, box.left, box.top, box.right, box.bottom);
-            Rectangle(hdc, box.left, 750, box.right, 780);
-            box.left = i*30 ;
-            box.right = box.left + 30;
 
-        }
-    }
-    box.top = 0;
-    box.bottom = box.top + 30;
-    for (int i = 0; i < height + 1; i++)
-    {
-        if (map_area[0][i] == wall)
-        {
-            Rectangle(hdc, 0, box.top, 30, box.bottom);
-            Rectangle(hdc, 900, box.top, 930, box.bottom);
-            box.top = i*30;
-            box.bottom = box.top + 30;
-
-        }
-    }*/
-
-    
     ///맵 그리는 코드
     for (int i = 0; i < width; i++)
     {
         for (int j = 0; j < height; j++)
         {   
-            box.left = i * 30;
-            box.top = j * 30;
+            box.left = 100+(i * 30);
+            box.top = 100+(j * 30);
             box.right = box.left + 30;
             box.bottom = box.top + 30;
 
-            if (map_area[i][j] == wall)
+            if (object.playerPlace.right == box.left) 
             {
+                
+            }
+
+            if (map_area[i][j] == wall)
+            {   
                 Rectangle(hdc, box.left, box.top, box.right, box.bottom);
             }
-            if(map_area[i][j]== item)
+            else if(map_area[i][j] == item)
             {   
+                if (IntersectRect(&a, &(object.playerPlace), &box)) {
+                    map_area[i][j] = space;
+                }
                 box.left += 10;
                 box.top += 10;
                 box.right = box.left + 10;
                 box.bottom = box.top + 10;
                 Ellipse(hdc, box.left, box.top, box.right, box.bottom);
             }
+            
         }
     }
 
