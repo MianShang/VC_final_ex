@@ -58,14 +58,5 @@
     <Image Include="VC_final_ex.ico">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="bitmap1.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="..\팩맨\packman.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="..\팩맨\pngwing.com.png">
-      <Filter>리소스 파일</Filter>
-    </Image>
   </ItemGroup>
 </Project>

@@ -10,6 +10,11 @@
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
+///윈도우 창크기 구하는 RECT변수
+RECT wn_Size;
+Map_Area map1;  ///맵
+OBject object;  ///객체
+
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -122,46 +127,51 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 
-///윈도우 창크기 구하는 RECT변수
-RECT wn_Size;
-Map_Area map1;
-OBject object;
+
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
-    {
+    {   
+        
+        
+        static HDC hdc;
         static HDC memDC;
         static HBITMAP MyBitmap, OldBitmap;
 
     case WM_CREATE: 
     {   
+
+        
         ///시작전 화면 크기 구하기
         GetClientRect(hWnd, &wn_Size);
+        
+        hdc = GetDC(hWnd);
 
-        HDC hdc = GetDC(hWnd);
         ///벽 지정 for문
         map1.Setmap();
         memDC = CreateCompatibleDC(hdc); /// 백버퍼 핸들 생성
-        MyBitmap = CreateCompatibleBitmap(hdc, wn_Size.right, wn_Size.bottom); ///back버퍼 도화지 크기 조정
-        SelectObject(memDC, MyBitmap); ///도화지 선택
-        ReleaseDC(hWnd, hdc);
+        
     }
     break;
 
     case WM_SIZE: 
-    {
+    {   
+        
+       
         ///창크기 변경시 마다 창크기 구하기
         GetClientRect(hWnd,&wn_Size);
+
+        MyBitmap = CreateCompatibleBitmap(hdc, wn_Size.right, wn_Size.bottom); ///back버퍼 도화지 크기 조정
+        SelectObject(memDC, MyBitmap); ///도화지 선택
     }
     break;
 
     case WM_KEYDOWN: 
     {   
-        
-        object.setPlayer(wParam);
-        InvalidateRect(hWnd, NULL, FALSE);
-        
+            object.setPlayer(wParam);
+            InvalidateRect(hWnd, NULL, FALSE);
+     
     }
     break;
 
@@ -188,7 +198,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
             HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 0));
-       
+            
                 FillRect(memDC, &wn_Size, hBrush);
            
             

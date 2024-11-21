@@ -8,12 +8,13 @@ class OBject
 {
 private:
 	
-	bool play = TRUE;
+	
 
 public:
 	
-	RECT playerPlace = { 130,130,160,160 };
+	
 
+	RECT playerPlace = { 130,130,160,160 };
 	void drawPlayer(HDC);
 
 	void setPlayer(WPARAM);

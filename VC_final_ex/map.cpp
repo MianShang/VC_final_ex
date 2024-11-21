@@ -60,41 +60,37 @@ void Map_Area::Setmap()
 
 }
 
-void Map_Area::Getmap(HDC hdc,OBject object, HWND hWnd)
+void Map_Area::Getmap(HDC hdc, OBject object, HWND hWnd)
 {
 
     ///맵 그리는 코드
     for (int i = 0; i < width; i++)
     {
         for (int j = 0; j < height; j++)
-        {   
-            box.left = 100+(i * 30);
-            box.top = 100+(j * 30);
+        {
+            box.left = 100 + (i * 30);
+            box.top = 100 + (j * 30);
             box.right = box.left + 30;
             box.bottom = box.top + 30;
-
-            if (object.playerPlace.right == box.left) 
-            {
-                
-            }
 
             if (map_area[i][j] == wall)
             {   
                 Rectangle(hdc, box.left, box.top, box.right, box.bottom);
             }
-            else if(map_area[i][j] == item)
-            {   
+            else if (map_area[i][j] == item)
+            {
                 if (IntersectRect(&a, &(object.playerPlace), &box)) {
                     map_area[i][j] = space;
                 }
+
                 box.left += 10;
                 box.top += 10;
                 box.right = box.left + 10;
                 box.bottom = box.top + 10;
                 Ellipse(hdc, box.left, box.top, box.right, box.bottom);
             }
-            
+
         }
     }
-
 }
+

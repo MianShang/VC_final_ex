@@ -23,7 +23,7 @@ public:
 	int map_area[width][height];
 	
 	void Setmap();
-	void Getmap(HDC,OBject,HWND);
 
+	void Getmap(HDC, OBject, HWND);
 
 };

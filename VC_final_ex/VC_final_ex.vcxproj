@@ -143,9 +143,6 @@
     <ResourceCompile Include="VC_final_ex.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\팩맨\packman.bmp" />
-    <Image Include="..\팩맨\pngwing.com.png" />
-    <Image Include="bitmap1.bmp" />
     <Image Include="small.ico" />
     <Image Include="VC_final_ex.ico" />
   </ItemGroup>
