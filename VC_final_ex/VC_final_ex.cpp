@@ -12,8 +12,6 @@ WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 ///윈도우 창크기 구하는 RECT변수
 RECT wn_Size;
-Map_Area map1;  ///맵
-OBject object;  ///객체
 
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
@@ -127,30 +125,33 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 
+HANDLE g_enemy[5];
+
 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {   
-        
-        
         static HDC hdc;
         static HDC memDC;
         static HBITMAP MyBitmap, OldBitmap;
 
     case WM_CREATE: 
     {   
+        map_area = std::make_unique<Map_Area>();  ///맵객체
+        object = std::make_unique<OBject>(); // 플레이어 객체
 
-        
         ///시작전 화면 크기 구하기
         GetClientRect(hWnd, &wn_Size);
         
         hdc = GetDC(hWnd);
 
         ///벽 지정 for문
-        map1.Setmap();
+        map_area->Setmap();
         memDC = CreateCompatibleDC(hdc); /// 백버퍼 핸들 생성
+        object->setAreaCopy(map_area->map_area);
+
         
     }
     break;
@@ -169,9 +170,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
     case WM_KEYDOWN: 
     {   
-            object.setPlayer(wParam);
+            object->setPlayer(wParam, hWnd);
             InvalidateRect(hWnd, NULL, FALSE);
-     
     }
     break;
 
@@ -197,22 +197,22 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-            HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 0));
-            
-                FillRect(memDC, &wn_Size, hBrush);
-           
-            
-            DeleteObject(hBrush);
+
+            ///후위버퍼를 myBrush로 칠하기
+            HBRUSH myBrush = CreateSolidBrush(RGB(0, 0, 0));
+            FillRect(memDC, &wn_Size, myBrush);
+            DeleteObject(myBrush);
+
 
             ///맵 그리기를 후위 버퍼에 그리기
-            map1.Getmap(memDC,object,hWnd);
-
-            ///플레이어 Object를 그림
-            object.drawPlayer(memDC);
-
+            map_area->Getmap(memDC,hWnd,object->playerPlace);
+            
+            ///플레이어, 적 Object를 그림
+            object->drawPlayer(memDC);
+            object->drawEnemy(memDC);
             ///후위 버퍼 내용을 전위 버퍼 hdc에 고속 복사
             BitBlt(hdc, 0,0, wn_Size.right,wn_Size.bottom, memDC, 0, 0, SRCCOPY); 
-           
+          
             EndPaint(hWnd, &ps);
         }
         break;

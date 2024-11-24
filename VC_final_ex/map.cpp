@@ -60,7 +60,7 @@ void Map_Area::Setmap()
 
 }
 
-void Map_Area::Getmap(HDC hdc, OBject object, HWND hWnd)
+void Map_Area::Getmap(HDC hdc, HWND hWnd, RECT player)
 {
 
     ///맵 그리는 코드
@@ -79,7 +79,7 @@ void Map_Area::Getmap(HDC hdc, OBject object, HWND hWnd)
             }
             else if (map_area[i][j] == item)
             {
-                if (IntersectRect(&a, &(object.playerPlace), &box)) {
+                if (IntersectRect(&a, &player, &box)) {
                     map_area[i][j] = space;
                 }
 

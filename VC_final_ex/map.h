@@ -24,6 +24,6 @@ public:
 	
 	void Setmap();
 
-	void Getmap(HDC, OBject, HWND);
+	void Getmap(HDC,HWND,RECT);
 
 };
