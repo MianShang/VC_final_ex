@@ -3,6 +3,7 @@
 
 #include "framework.h"
 #include "VC_final_ex.h"
+#include <time.h>
 
 #define MAX_LOADSTRING 100
 
@@ -128,7 +129,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 HANDLE g_enemy[5];
 
 
-
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
@@ -137,6 +137,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         static HDC memDC;
         static HBITMAP MyBitmap, OldBitmap;
 
+    case WM_TIMER: 
+    {
+        if (1 == wParam) 
+        {
+            object->setEnemy(hWnd);
+            InvalidateRect(hWnd, NULL, FALSE);
+        }
+    }
+    break;
     case WM_CREATE: 
     {   
         map_area = std::make_unique<Map_Area>();  ///맵객체
@@ -151,8 +160,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         map_area->Setmap();
         memDC = CreateCompatibleDC(hdc); /// 백버퍼 핸들 생성
         object->setAreaCopy(map_area->map_area);
-
         
+        SetTimer(hWnd, 1, 500, NULL);
     }
     break;
 

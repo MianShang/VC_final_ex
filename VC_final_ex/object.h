@@ -20,6 +20,6 @@ public:
 	void drawPlayer(HDC);
 	void drawEnemy(HDC);
 	void setPlayer(WPARAM, HWND);
-	void setEnemy();
+	void setEnemy(HWND);
 
 };

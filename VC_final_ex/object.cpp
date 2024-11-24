@@ -82,17 +82,15 @@ void OBject::setPlayer(WPARAM wParam,HWND hWnd)
 	}
 	break;
 	}
-	
-
-	if (IntersectRect(&out, &playerPlace, &enemyPlace))
-	{	
-		MessageBox(hWnd, L"적에게 당했습니다", L"게임종료", MB_OK);
-	}
 }
 
-void OBject::setEnemy() 
+void OBject::setEnemy(HWND hWnd) 
 {
+	a = (enemyPlace.left - 100) / 30;
+	b = (enemyPlace.top - 100) / 30;
+
 	randomEnemyPlace = rand() % 4;
+	
 	switch (randomEnemyPlace)
 	{
 	case 0:
@@ -101,8 +99,8 @@ void OBject::setEnemy()
 		{
 			break;
 		}
-		playerPlace.left += 30;
-		playerPlace.right = playerPlace.left + 30;
+		enemyPlace.left += 30;
+		enemyPlace.right = enemyPlace.left + 30;
 
 	}
 	break;
@@ -112,8 +110,8 @@ void OBject::setEnemy()
 		{
 			break;
 		}
-		playerPlace.top -= 30;
-		playerPlace.bottom = playerPlace.top + 30;
+		enemyPlace.top -= 30;
+		enemyPlace.bottom = enemyPlace.top + 30;
 	}
 	break;
 	case 2:
@@ -122,8 +120,8 @@ void OBject::setEnemy()
 		{
 			break;
 		}
-		playerPlace.left -= 30;
-		playerPlace.right = playerPlace.left + 30;
+		enemyPlace.left -= 30;
+		enemyPlace.right = enemyPlace.left + 30;
 	}
 	break;
 	case 3:
@@ -132,11 +130,16 @@ void OBject::setEnemy()
 		{
 			break;
 		}
-		playerPlace.top += 30;
-		playerPlace.bottom = playerPlace.top + 30;
+		enemyPlace.top += 30;
+		enemyPlace.bottom = enemyPlace.top + 30;
 	}
 	break;
 
 	}
 
+	if (IntersectRect(&out, &playerPlace, &enemyPlace))
+	{
+		KillTimer(hWnd, 1);
+		MessageBox(hWnd, L"적에게 당했습니다", L"게임종료", MB_OK);
+	}
 }
