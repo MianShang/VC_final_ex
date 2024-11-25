@@ -82,6 +82,13 @@ void OBject::setPlayer(WPARAM wParam,HWND hWnd)
 	}
 	break;
 	}
+
+	if (IntersectRect(&out, &playerPlace, &enemyPlace))
+	{
+		KillTimer(hWnd, 1);
+		MessageBox(hWnd, L"적에게 당했습니다", L"게임종료", MB_OK);
+	}
+
 }
 
 void OBject::setEnemy(HWND hWnd) 
@@ -137,9 +144,27 @@ void OBject::setEnemy(HWND hWnd)
 
 	}
 
+
 	if (IntersectRect(&out, &playerPlace, &enemyPlace))
 	{
 		KillTimer(hWnd, 1);
 		MessageBox(hWnd, L"적에게 당했습니다", L"게임종료", MB_OK);
 	}
+}
+
+void OBject::bfs(int start_x, int start_y ) 
+{
+
+	for (int i = 0; i < 30; i++)
+	{
+		for (int j = 0; j < 25; j++)
+		{
+			visited[i][j] = false;
+		}
+	}
+
+	/*std::queue<pair<int,int>> q;
+	q.push({ start_x,start_y });*/
+
+	
 }

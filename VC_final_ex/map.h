@@ -17,6 +17,7 @@ private:
 	
 	RECT box;
 	RECT a;
+	wchar_t bufi[128] = { 0, };
 
 public:
 
@@ -25,5 +26,9 @@ public:
 	void Setmap();
 
 	void Getmap(HDC,HWND,RECT);
+
+	int g_item = 0;
+	int f_item = 0;
+
 
 };

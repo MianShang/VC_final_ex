@@ -58,10 +58,28 @@ void Map_Area::Setmap()
     ///적 시작위치 설정
     map_area[28][23] = enemy;
 
+    for (int i = 0; i < width; i++)
+    {
+        for (int j = 0; j < height; j++)
+        {
+            if (map_area[i][j] == item)
+            {
+                f_item++;
+            }
+        }
+    }
+
 }
 
 void Map_Area::Getmap(HDC hdc, HWND hWnd, RECT player)
 {
+    
+    wsprintf(bufi, L"아이템 먹은 갯수 : %d", g_item);
+    SetBkMode(hdc, TRANSPARENT); // 뒷배경 투명
+    SetTextColor(hdc, RGB(255, 255, 255)); // 글자색 변경
+    TextOut(hdc, 1100, 300, bufi, lstrlenW(bufi));
+    wsprintf(bufi, L"총 아이템 : %d", f_item);
+    TextOut(hdc, 1100, 250, bufi, lstrlenW(bufi));
 
     ///맵 그리는 코드
     for (int i = 0; i < width; i++)
@@ -81,6 +99,7 @@ void Map_Area::Getmap(HDC hdc, HWND hWnd, RECT player)
             {
                 if (IntersectRect(&a, &player, &box)) {
                     map_area[i][j] = space;
+                    g_item++;
                 }
 
                 box.left += 10;
@@ -92,5 +111,26 @@ void Map_Area::Getmap(HDC hdc, HWND hWnd, RECT player)
 
         }
     }
+
+    if (f_item == g_item) 
+    {
+        KillTimer(hWnd, 1);
+        g_item++;
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                if (map_area[i][j] == item)
+                {
+                     map_area[i][j] = space;
+                }
+            }
+        }
+        InvalidateRect(hWnd, NULL, FALSE);
+        MessageBox(hWnd, L"게임종료", L"모든 아이템을 먹었습니다", MB_OK);
+        
+    }
+
 }
+
 

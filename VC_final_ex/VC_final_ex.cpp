@@ -12,8 +12,7 @@ HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 ///윈도우 창크기 구하는 RECT변수
-RECT wn_Size;
-
+RECT wn_Size = {0,0,2000,2000};
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -30,6 +29,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: 여기에 코드를 입력합니다.
+    
 
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -101,8 +101,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+   HWND hWnd = CreateWindowW(szWindowClass, L"202307063_임지섭_기말과제", WS_OVERLAPPEDWINDOW,
+      CW_USEDEFAULT, 0, 1400, 1000, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
@@ -148,6 +148,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     break;
     case WM_CREATE: 
     {   
+
+       
+
         map_area = std::make_unique<Map_Area>();  ///맵객체
         object = std::make_unique<OBject>(); // 플레이어 객체
 
@@ -181,6 +184,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {   
             object->setPlayer(wParam, hWnd);
             InvalidateRect(hWnd, NULL, FALSE);
+            
+            if (wParam == VK_SPACE) 
+            {   
+                map_area->g_item = map_area->f_item;
+            }
     }
     break;
 
