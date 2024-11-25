@@ -15,15 +15,19 @@ class Map_Area
 {
 private:
 	
+	wchar_t PlayTimeText[100];
+
 	RECT box;
 	RECT a;
+
+	int PlayTime = 0;
 
 public:
 
 	int map_area[width][height];
 	
 	void Setmap();
-
 	void Getmap(HDC,HWND,RECT);
-
+	void GetPlayTime(HDC);
+	void SetPlayTime();
 };

@@ -1,7 +1,17 @@
 #include "map.h"
 
-///잠깐 따로 빼둠
+void Map_Area::SetPlayTime()
+{
+    PlayTime++;
+    wsprintf(PlayTimeText, L"플레이 시간 : %d", PlayTime);
+}
 
+void Map_Area::GetPlayTime(HDC memDC) 
+{   
+    SetBkMode(memDC, TRANSPARENT); // 뒷배경 투명
+    SetTextColor(memDC, RGB(255, 255, 255)); // 글자색 변경
+    TextOut(memDC, 1500, 300, PlayTimeText,NULL);
+}
 
 void Map_Area::Setmap()
 {   

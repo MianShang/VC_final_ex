@@ -126,9 +126,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 
-HANDLE g_enemy[5];
-
-
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
@@ -144,6 +141,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             object->setEnemy(hWnd);
             InvalidateRect(hWnd, NULL, FALSE);
         }
+
+        if (2 == wParam) 
+        {   
+            map_area->SetPlayTime();
+            InvalidateRect(hWnd, NULL, FALSE);
+        }
+
     }
     break;
     case WM_CREATE: 
@@ -162,6 +166,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         object->setAreaCopy(map_area->map_area);
         
         SetTimer(hWnd, 1, 500, NULL);
+        SetTimer(hWnd, 2, 1000, NULL);
     }
     break;
 
@@ -215,7 +220,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
             ///맵 그리기를 후위 버퍼에 그리기
             map_area->Getmap(memDC,hWnd,object->playerPlace);
-            
+            map_area->GetPlayTime(memDC);
+
             ///플레이어, 적 Object를 그림
             object->drawPlayer(memDC);
             object->drawEnemy(memDC);
