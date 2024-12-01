@@ -12,8 +12,7 @@ HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 ///윈도우 창크기 구하는 RECT변수
-RECT wn_Size;
-
+RECT wn_Size = {0,0,2000,2000};
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -30,6 +29,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: 여기에 코드를 입력합니다.
+    
 
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -101,8 +101,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+   HWND hWnd = CreateWindowW(szWindowClass, L"202307063_임지섭_기말과제", WS_OVERLAPPEDWINDOW,
+      CW_USEDEFAULT, 0, 1400, 1000, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
@@ -136,7 +136,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
     case WM_TIMER: 
     {
-        if (1 == wParam) 
+        if (gameStarted && wParam == 1)
         {
             object->setEnemy(hWnd);
             InvalidateRect(hWnd, NULL, FALSE);
@@ -152,6 +152,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     break;
     case WM_CREATE: 
     {   
+
+       
+
         map_area = std::make_unique<Map_Area>();  ///맵객체
         object = std::make_unique<OBject>(); // 플레이어 객체
 
@@ -165,8 +168,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         memDC = CreateCompatibleDC(hdc); /// 백버퍼 핸들 생성
         object->setAreaCopy(map_area->map_area);
         
-        SetTimer(hWnd, 1, 500, NULL);
-        SetTimer(hWnd, 2, 1000, NULL);
+        // 버튼 생성
+        hStartButton = CreateWindow(L"BUTTON", L"게임 시작",WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 1100, 350, 100, 30, hWnd, (HMENU)1, hInst, nullptr);
     }
     break;
 
@@ -186,6 +189,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {   
             object->setPlayer(wParam, hWnd);
             InvalidateRect(hWnd, NULL, FALSE);
+            
+            if (wParam == VK_SPACE) 
+            {   
+                map_area->g_item = map_area->f_item;
+            }
     }
     break;
 
@@ -195,6 +203,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // 메뉴 선택을 구문 분석합니다:
             switch (wmId)
             {
+            case 1:
+            { // 버튼 클릭 이벤트
+                if (!gameStarted)
+                {
+                    gameStarted = true; // 게임 시작 플래그 설정
+                    SetTimer(hWnd, 1, 270, NULL); // 타이머 시작
+                    ShowWindow(hStartButton, SW_HIDE); // 버튼 숨기기
+                }
+            }
+                break;
+            case 2: 
+                {   
+                    gameStarted = false;
+                    map_area->resetGame(object); // 게임 리셋
+                    ShowWindow(hStartButton, SW_SHOW); // 버튼 다시 활성
+                }
+                break;
             case IDM_ABOUT:
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
                 break;

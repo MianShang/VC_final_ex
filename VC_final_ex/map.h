@@ -20,14 +20,20 @@ private:
 	RECT box;
 	RECT a;
 
+	wchar_t bufi[128] = { 0, };
+
 	int PlayTime = 0;
 
 public:
 
 	int map_area[width][height];
-	
+	int g_item = 0;
+	int f_item = 0;
+
 	void Setmap();
 	void Getmap(HDC,HWND,RECT);
+	void resetGame(std::unique_ptr<OBject>& object); // 게임 리셋
+	
 	void GetPlayTime(HDC);
 	void SetPlayTime();
 };
