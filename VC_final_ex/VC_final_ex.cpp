@@ -139,7 +139,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
     case WM_TIMER: 
     {
-        if (1 == wParam) 
+        if (gameStarted && wParam == 1)
         {
             object->setEnemy(hWnd);
             InvalidateRect(hWnd, NULL, FALSE);
@@ -164,7 +164,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         memDC = CreateCompatibleDC(hdc); /// 백버퍼 핸들 생성
         object->setAreaCopy(map_area->map_area);
         
-        SetTimer(hWnd, 1, 270, NULL);
+        // 버튼 생성
+        hStartButton = CreateWindow(L"BUTTON", L"게임 시작",WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 1100, 350, 100, 30, hWnd, (HMENU)1, hInst, nullptr);
     }
     break;
 
@@ -198,6 +199,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // 메뉴 선택을 구문 분석합니다:
             switch (wmId)
             {
+            case 1:
+            { // 버튼 클릭 이벤트
+                if (!gameStarted)
+                {
+                    gameStarted = true; // 게임 시작 플래그 설정
+                    SetTimer(hWnd, 1, 270, NULL); // 타이머 시작
+                    ShowWindow(hStartButton, SW_HIDE); // 버튼 숨기기
+                }
+            }
+                break;
+            case 2: 
+                {   
+                    gameStarted = false;
+                    map_area->resetGame(object); // 게임 리셋
+                    ShowWindow(hStartButton, SW_SHOW); // 버튼 다시 활성
+                }
+                break;
             case IDM_ABOUT:
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
                 break;

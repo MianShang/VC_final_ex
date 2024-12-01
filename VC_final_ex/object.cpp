@@ -99,40 +99,104 @@ void OBject::setPlayer(WPARAM wParam,HWND hWnd)
 		if (IntersectRect(&out, &playerPlace, &enemy))
 		{
 			KillTimer(hWnd, 1);
-			MessageBox(hWnd, L"적에게 당했습니다", L"게임종료", MB_OK);
+			SendMessage(hWnd, WM_COMMAND, 2, NULL);
+			MessageBox(hWnd, L"게임 종료", L"적에게 당했습니다", MB_OK);
+			return;
 		}
 	}
 
 }
 
-void OBject::setEnemy(HWND hWnd) 
-{	
+void OBject::setEnemy(HWND hWnd)
+{
+	// 적들의 새 위치를 기록할 집합
+	std::set<std::pair<int, int>> occupied_positions;
+
+	// 모든 적의 현재 위치를 기록
+	for (const auto& enemy : enemyplaces)
+	{
+		int x = (enemy.left - 100) / 30;
+		int y = (enemy.top - 100) / 30;
+		occupied_positions.insert({ x, y });
+	}
+
+	// 각 적에 대해 이동 처리
 	for (auto& enemy : enemyplaces)
 	{
-		nextMove = bfs((enemy.left - 100) / 30, (enemy.top - 100) / 30);
+		int currentX = (enemy.left - 100) / 30;
+		int currentY = (enemy.top - 100) / 30;
 
+		// 현재 위치를 초기화
+		area[currentX][currentY] = 0;
 
-		/*std::pair<int, int> nextMove = bfs((enemyPlace.left - 100) / 30, (enemyPlace.top - 100) / 30);*/
+		// BFS로 다음 이동 위치 계산
+		nextMove = bfs(currentX, currentY);
 
 		int newX = nextMove.first;
 		int newY = nextMove.second;
 
+		// 이동하려는 위치가 다른 적과 충돌하면 다른 방향 탐색
+		if (occupied_positions.count({ newX, newY }) > 0)
+		{
+			bool found_alternative = false;
 
-		// 새 위치로 적을 이동시킵니다.
+			// 상하좌우 대체 경로 탐색
+			int dx[] = { 1, 0, -1, 0 };
+			int dy[] = { 0, 1, 0, -1 };
+
+			for (int i = 0; i < 4; i++)
+			{
+				int altX = currentX + dx[i];
+				int altY = currentY + dy[i];
+
+				// 이동 가능한 위치인지 확인
+				if (altX >= 0 && altX < 30 && altY >= 0 && altY < 25 &&
+					area[altX][altY] != 1 && occupied_positions.count({ altX, altY }) == 0)
+				{
+					newX = altX;
+					newY = altY;
+					found_alternative = true;
+					break;
+				}
+			}
+
+			// 대체 경로를 찾지 못하면 제자리 유지
+			if (!found_alternative)
+			{
+				newX = currentX;
+				newY = currentY;
+			}
+		}
+
+		// 새 위치를 기록
+		occupied_positions.insert({ newX, newY });
+
+		// 적의 새 위치로 이동
 		enemy.left = 100 + newX * 30;
 		enemy.right = enemy.left + 30;
 		enemy.top = 100 + newY * 30;
 		enemy.bottom = enemy.top + 30;
 
+		// 맵에 새 위치 반영
+		area[newX][newY] = 4;
+		
+	}
 
+	for (const auto& enemy : enemyplaces) {
 
 		if (IntersectRect(&out, &playerPlace, &enemy))
 		{
 			KillTimer(hWnd, 1);
-			MessageBox(hWnd, L"적에게 당했습니다", L"게임종료", MB_OK);
+			SendMessage(hWnd, WM_COMMAND, 2, NULL);
+			MessageBox(hWnd, L"게임 종료", L"적에게 당했습니다", MB_OK);
+			return;
 		}
 	}
+
 }
+
+
+
 
 std::pair<int,int> OBject::bfs(int start_x, int start_y ) 
 {

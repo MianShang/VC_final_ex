@@ -5,6 +5,7 @@
 #include <vector>
 #include <queue>
 #include <utility>
+#include <set>
 
 #define Maze_Size 30
 
@@ -16,12 +17,14 @@ private:
 
 	int area[30][25];
 
-	std::vector<RECT>enemyplaces;
+	
 	std::pair<int, int> bfs(int start_x, int start_y);
 	std::pair<int, int> nextMove;
 	
 
 public:
+
+	std::vector<RECT>enemyplaces;
 
 	RECT playerPlace = { 130,130,160,160 };
 	RECT out;

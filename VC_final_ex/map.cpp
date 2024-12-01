@@ -1,29 +1,26 @@
 #include "map.h"
 
-///잠깐 따로 빼둠
-
-
 void Map_Area::Setmap()
-{   
-
-    for (int i = 0; i < width; i ++)
+{
+    // 맵 초기화
+    for (int i = 0; i < width; i++)
     {
-        for (int j = 0; j < height; j ++)
+        for (int j = 0; j < height; j++)
         {
             map_area[i][j] = item;
         }
     }
 
-    ///벽 테두리 설정
+    // 벽 테두리 설정
     for (int i = 0; i < width; i++)
     {
         map_area[i][0] = wall;
-        map_area[i][height-1] = wall;
+        map_area[i][height - 1] = wall;
     }
     for (int i = 0; i < height; i++)
     {
         map_area[0][i] = wall;
-        map_area[width-1][i] = wall;
+        map_area[width - 1][i] = wall;
     }
 
     // 가운데 벽 설정
@@ -33,7 +30,7 @@ void Map_Area::Setmap()
         {
             map_area[i][j] = wall;
 
-            /// 상하좌우 중 랜덤하게 한 방향으로 벽 연장 설정
+            // 상하좌우 중 랜덤하게 한 방향으로 벽 연장 설정
             int direction = rand() % 4;
             switch (direction)
             {
@@ -53,15 +50,25 @@ void Map_Area::Setmap()
         map_area[i][j] = item;
     }
 
-    ///플레이어 시작위치 설정
+    // 플레이어 시작 위치 설정
     map_area[1][1] = start;
-    ///적 시작위치 설정
-    map_area[28][23] = enemy;
-    map_area[20][23] = enemy;
-    map_area[15][10] = enemy;
-    map_area[28][10] = enemy;
 
+    // 적의 랜덤 시작 위치 설정
+    int enemy_count = 4; // 적의 개수
+    while (enemy_count > 0)
+    {
+        int i = 1 + rand() % (width - 2);  // 맵 테두리를 제외한 내부 좌표
+        int j = 1 + rand() % (height - 2);
 
+        // 빈 공간에서만 적 생성
+        if (map_area[i][j] == item || map_area[i][j] == space)
+        {
+            map_area[i][j] = enemy;
+            enemy_count--;
+        }
+    }
+
+    // 아이템 총 개수 계산
     for (int i = 0; i < width; i++)
     {
         for (int j = 0; j < height; j++)
@@ -72,8 +79,8 @@ void Map_Area::Setmap()
             }
         }
     }
-
 }
+
 
 void Map_Area::Getmap(HDC hdc, HWND hWnd, RECT player)
 {
@@ -132,9 +139,29 @@ void Map_Area::Getmap(HDC hdc, HWND hWnd, RECT player)
         }
         InvalidateRect(hWnd, NULL, FALSE);
         MessageBox(hWnd, L"게임종료", L"모든 아이템을 먹었습니다", MB_OK);
-        
+        SendMessage(hWnd, WM_COMMAND, 2, NULL);
     }
 
 }
 
+
+void Map_Area::resetGame(std::unique_ptr<OBject>& object)
+{   
+    object->enemyplaces.clear();
+
+    object->playerPlace = { 130,130,160,160 };
+
+    // 맵 상태 초기화
+    Setmap();
+
+
+    // 객체 초기화
+    object->setAreaCopy(map_area);
+
+    // 아이템 상태 초기화
+    g_item = 0;
+
+    // 화면 갱신
+    InvalidateRect(NULL, NULL, TRUE);
+}
 
