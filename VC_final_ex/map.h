@@ -32,8 +32,6 @@ public:
 
 	void Setmap();
 	void Getmap(HDC,HWND,RECT);
-	void resetGame(std::unique_ptr<OBject>& object); // 게임 리셋
-	
-	void GetPlayTime(HDC);
+	void resetGame(std::unique_ptr<OBject>& object, HDC); // 게임 리셋
 	void SetPlayTime();
 };

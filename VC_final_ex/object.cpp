@@ -99,6 +99,7 @@ void OBject::setPlayer(WPARAM wParam,HWND hWnd)
 		if (IntersectRect(&out, &playerPlace, &enemy))
 		{
 			KillTimer(hWnd, 1);
+			KillTimer(hWnd, 2);
 			SendMessage(hWnd, WM_COMMAND, 2, NULL);
 			MessageBox(hWnd, L"게임 종료", L"적에게 당했습니다", MB_OK);
 			return;
@@ -187,6 +188,7 @@ void OBject::setEnemy(HWND hWnd)
 		if (IntersectRect(&out, &playerPlace, &enemy))
 		{
 			KillTimer(hWnd, 1);
+			KillTimer(hWnd, 2);
 			SendMessage(hWnd, WM_COMMAND, 2, NULL);
 			MessageBox(hWnd, L"게임 종료", L"적에게 당했습니다", MB_OK);
 			return;

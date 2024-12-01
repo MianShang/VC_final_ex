@@ -169,7 +169,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         object->setAreaCopy(map_area->map_area);
         
         // 버튼 생성
-        hStartButton = CreateWindow(L"BUTTON", L"게임 시작",WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 1100, 350, 100, 30, hWnd, (HMENU)1, hInst, nullptr);
+        hStartButton = CreateWindow(L"BUTTON", L"게임 시작",WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 1100, 400, 100, 30, hWnd, (HMENU)1, hInst, nullptr);
     }
     break;
 
@@ -187,13 +187,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
     case WM_KEYDOWN: 
     {   
+
+        if (wParam == VK_SPACE)
+        {   
+            ///치트 힘들면 space바로 클리어 확인
+            map_area->g_item = map_area->f_item;
+        }
+
+        if (gameStarted) 
+        {
             object->setPlayer(wParam, hWnd);
             InvalidateRect(hWnd, NULL, FALSE);
+        }
+
             
-            if (wParam == VK_SPACE) 
-            {   
-                map_area->g_item = map_area->f_item;
-            }
     }
     break;
 
@@ -210,13 +217,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                     gameStarted = true; // 게임 시작 플래그 설정
                     SetTimer(hWnd, 1, 270, NULL); // 타이머 시작
                     ShowWindow(hStartButton, SW_HIDE); // 버튼 숨기기
+                    SetTimer(hWnd, 2, 1000,NULL);
                 }
             }
                 break;
             case 2: 
                 {   
                     gameStarted = false;
-                    map_area->resetGame(object); // 게임 리셋
+                    map_area->resetGame(object,hdc); // 게임 리셋
                     ShowWindow(hStartButton, SW_SHOW); // 버튼 다시 활성
                 }
                 break;
@@ -245,7 +253,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
             ///맵 그리기를 후위 버퍼에 그리기
             map_area->Getmap(memDC,hWnd,object->playerPlace);
-            map_area->GetPlayTime(memDC);
 
             ///플레이어, 적 Object를 그림
             object->drawPlayer(memDC);

@@ -3,15 +3,9 @@
 void Map_Area::SetPlayTime()
 {
     PlayTime++;
-    wsprintf(PlayTimeText, L"플레이 시간 : %d", PlayTime);
 }
 
-void Map_Area::GetPlayTime(HDC memDC) 
-{   
-    SetBkMode(memDC, TRANSPARENT); // 뒷배경 투명
-    SetTextColor(memDC, RGB(255, 255, 255)); // 글자색 변경
-    TextOut(memDC, 1500, 300, PlayTimeText,NULL);
-}
+
 
 void Map_Area::Setmap()
 {
@@ -104,6 +98,8 @@ void Map_Area::Getmap(HDC hdc, HWND hWnd, RECT player)
     TextOut(hdc, 1100, 300, bufi, lstrlenW(bufi));
     wsprintf(bufi, L"총 아이템 : %d", f_item);
     TextOut(hdc, 1100, 250, bufi, lstrlenW(bufi));
+    wsprintf(bufi, L"플레이 시간 : %d 초", PlayTime);
+    TextOut(hdc, 1100, 350, bufi, lstrlenW(bufi));
 
     ///맵 그리는 코드
     for (int i = 0; i < width; i++)
@@ -139,6 +135,7 @@ void Map_Area::Getmap(HDC hdc, HWND hWnd, RECT player)
     if (f_item == g_item) 
     {
         KillTimer(hWnd, 1);
+        KillTimer(hWnd, 2);
         g_item++;
         for (int i = 0; i < width; i++)
         {
@@ -158,23 +155,44 @@ void Map_Area::Getmap(HDC hdc, HWND hWnd, RECT player)
 }
 
 
-void Map_Area::resetGame(std::unique_ptr<OBject>& object)
+void Map_Area::resetGame(std::unique_ptr<OBject>& object,HDC hdc)
 {   
     object->enemyplaces.clear();
 
     object->playerPlace = { 130,130,160,160 };
 
     // 맵 상태 초기화
-    Setmap();
 
+    PlayTime = 0;
 
     // 객체 초기화
     object->setAreaCopy(map_area);
 
+    f_item = 0;
+
+    //맵 초기화
+
+    // 1번째 방법
+    /*Setmap();*/
+
+    // 2번째 방법
+    for (int i = 0; i < width; i++)
+    {
+        for (int j = 0; j < height; j++)
+        {   
+
+            if (map_area[i][j] == space)
+            {   
+                map_area[i][j] = item;
+                f_item++;
+            }
+        }
+    }
+    
     // 아이템 상태 초기화
     g_item = 0;
 
     // 화면 갱신
-    InvalidateRect(NULL, NULL, TRUE);
+    InvalidateRect(NULL, NULL, FALSE);
 }
 
