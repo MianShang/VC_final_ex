@@ -164,7 +164,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         memDC = CreateCompatibleDC(hdc); /// 백버퍼 핸들 생성
         object->setAreaCopy(map_area->map_area);
         
-        SetTimer(hWnd, 1, 500, NULL);
+        SetTimer(hWnd, 1, 270, NULL);
     }
     break;
 

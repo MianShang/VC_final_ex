@@ -7,8 +7,16 @@ void OBject::setAreaCopy(int area[][25])
 	for (int i = 0; i < 30; i++) 
 	{
 		for (int j = 0; j < 25; j++) 
-		{
+		{	
 			this->area[i][j] = area[i][j];
+			
+			if (area[i][j] == 4) {
+				enemyPlace.left = 100 + i * 30;
+				enemyPlace.top = 100 + j * 30;
+				enemyPlace.right = enemyPlace.left + 30;
+				enemyPlace.bottom = enemyPlace.top + 30;
+				enemyplaces.push_back(enemyPlace);
+			}
 		}
 	}
 }
@@ -27,7 +35,10 @@ void OBject::drawEnemy(HDC memDC)
 {	
 	HBRUSH myBrush = CreateSolidBrush(RGB(255, 0, 0));
 	HBRUSH osBrush = (HBRUSH)SelectObject(memDC, myBrush);
-	Ellipse(memDC, enemyPlace.left, enemyPlace.top, enemyPlace.right, enemyPlace.bottom);
+	for (const auto& enemy : enemyplaces) 
+	{
+		Ellipse(memDC, enemy.left, enemy.top, enemy.right, enemy.bottom);
+	}
 	SelectObject(memDC, osBrush);
 	DeleteObject(osBrush);
 	DeleteObject(myBrush);
@@ -83,34 +94,43 @@ void OBject::setPlayer(WPARAM wParam,HWND hWnd)
 	break;
 	}
 
-	if (IntersectRect(&out, &playerPlace, &enemyPlace))
-	{
-		KillTimer(hWnd, 1);
-		MessageBox(hWnd, L"적에게 당했습니다", L"게임종료", MB_OK);
+	for (const auto& enemy : enemyplaces) {
+
+		if (IntersectRect(&out, &playerPlace, &enemy))
+		{
+			KillTimer(hWnd, 1);
+			MessageBox(hWnd, L"적에게 당했습니다", L"게임종료", MB_OK);
+		}
 	}
 
 }
 
 void OBject::setEnemy(HWND hWnd) 
-{
-	std::pair<int, int> nextMove = bfs((enemyPlace.left - 100) / 30, (enemyPlace.top - 100) / 30);
-
-	int newX = nextMove.first;
-	int newY = nextMove.second;
-
-
-	// 새 위치로 적을 이동시킵니다.
-	enemyPlace.left = 100 + newX * 30;
-	enemyPlace.right = enemyPlace.left + 30;
-	enemyPlace.top = 100 + newY * 30;
-	enemyPlace.bottom = enemyPlace.top + 30;
-
-
-
-	if (IntersectRect(&out, &playerPlace, &enemyPlace))
+{	
+	for (auto& enemy : enemyplaces)
 	{
-		KillTimer(hWnd, 1);
-		MessageBox(hWnd, L"적에게 당했습니다", L"게임종료", MB_OK);
+		nextMove = bfs((enemy.left - 100) / 30, (enemy.top - 100) / 30);
+
+
+		/*std::pair<int, int> nextMove = bfs((enemyPlace.left - 100) / 30, (enemyPlace.top - 100) / 30);*/
+
+		int newX = nextMove.first;
+		int newY = nextMove.second;
+
+
+		// 새 위치로 적을 이동시킵니다.
+		enemy.left = 100 + newX * 30;
+		enemy.right = enemy.left + 30;
+		enemy.top = 100 + newY * 30;
+		enemy.bottom = enemy.top + 30;
+
+
+
+		if (IntersectRect(&out, &playerPlace, &enemy))
+		{
+			KillTimer(hWnd, 1);
+			MessageBox(hWnd, L"적에게 당했습니다", L"게임종료", MB_OK);
+		}
 	}
 }
 

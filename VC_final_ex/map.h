@@ -17,18 +17,19 @@ private:
 	
 	RECT box;
 	RECT a;
+
 	wchar_t bufi[128] = { 0, };
 
 public:
 
 	int map_area[width][height];
-	
-	void Setmap();
-
-	void Getmap(HDC,HWND,RECT);
-
 	int g_item = 0;
 	int f_item = 0;
+
+	void Setmap();
+	void Getmap(HDC,HWND,RECT);
+
+	
 
 
 };

@@ -11,14 +11,18 @@
 class OBject
 {
 private:
-	int randomEnemyPlace;
+
+	RECT enemyPlace = { 940,790,970,820 };
+
 	int area[30][25];
-	
+
+	std::vector<RECT>enemyplaces;
 	std::pair<int, int> bfs(int start_x, int start_y);
+	std::pair<int, int> nextMove;
+	
 
 public:
 
-	RECT enemyPlace = {940,790,970,820};
 	RECT playerPlace = { 130,130,160,160 };
 	RECT out;
 

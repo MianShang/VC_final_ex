@@ -57,6 +57,10 @@ void Map_Area::Setmap()
     map_area[1][1] = start;
     ///적 시작위치 설정
     map_area[28][23] = enemy;
+    map_area[20][23] = enemy;
+    map_area[15][10] = enemy;
+    map_area[28][10] = enemy;
+
 
     for (int i = 0; i < width; i++)
     {
