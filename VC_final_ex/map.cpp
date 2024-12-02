@@ -181,7 +181,7 @@ void Map_Area::resetGame(std::unique_ptr<OBject>& object,HDC hdc)
         for (int j = 0; j < height; j++)
         {   
 
-            if (map_area[i][j] == space)
+            if (map_area[i][j] == space || map_area[i][j] == item)
             {   
                 map_area[i][j] = item;
                 f_item++;
