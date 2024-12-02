@@ -188,16 +188,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_KEYDOWN: 
     {   
 
-        if (wParam == VK_SPACE)
-        {   
-            ///치트 힘들면 space바로 클리어 확인
-            map_area->g_item = map_area->f_item;
-        }
+        
 
         if (gameStarted) 
         {
             object->setPlayer(wParam, hWnd);
             InvalidateRect(hWnd, NULL, FALSE);
+            
+            if (wParam == VK_SPACE)
+            {
+                ///치트 힘들면 space바로 클리어 확인
+                map_area->g_item = map_area->f_item;
+            }
         }
 
             
